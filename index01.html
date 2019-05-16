@@ -4,8 +4,7 @@
 		<meta charset="utf-8" />
 		<title></title>
 		  <link rel="stylesheet" href="css/layui.css">
-		  <link rel="stylesheet" href="css/style.css" />
-		  <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css?t=1554901097999" media="all">
+		  <link rel="stylesheet" href="css/style.css" />		  
 		  <link rel="stylesheet" type="text/css" href="assets/waifu.min.css?v=1.4.2"/>
 		<style>
 body
@@ -21,12 +20,12 @@ html,body
 #container
 {
 	position: absolute;
-	width:30%;
+	width:40%;
 	height:45%;
-	left:30%;top:40%; 
+	left:20%;top:40%; 
 	margin-left:-200px;
 	margin-top:-100px;
-	border:1px solid #00F
+	/*border:1px solid #00F*/
 }
 
 </style>
@@ -34,14 +33,35 @@ html,body
 	<body>
 		<div id="container"> 
 			<div class="layui-row">
-	    		<div class="layui-col-md4">
-					<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-for="item in title">{{item[0]}}</button>	      你的内容 9/12
-	    		</div>
-			    <div class="layui-col-md8"> 
-			  	
-			    </div>
+				
+				<div class="layui-tab layui-tab-card01">
+				  <ul class="layui-tab-title">
+				    <li class="layui-this"><i class="layui-icon layui-icon-home" style="font-size: 30px; color: #1E9FFF;"></i><br>常用网站</li>
+				    <li ><i class="layui-icon layui-icon-video" style="font-size: 30px; color: #1E9FFF;"></i><br>影视影音</li>				   
+				    <li ><i class="layui-icon layui-icon-util" style="font-size: 30px; color: #1E9FFF;"></i><br>在线工具</li>				   
+				    <li ><i class="layui-icon layui-icon-reply-fill" style="font-size: 30px; color: #1E9FFF;"></i><br>电脑小知识</li>
+				    <li ><i class="layui-icon layui-icon-app" style="font-size: 30px; color: #1E9FFF;"></i><br>工作助手</li>
+				    <li ><i class="layui-icon layui-icon-login-wechat" style="font-size: 30px; color: #1E9FFF;"></i><br>微信号</li>
+				    <li ><i class="layui-icon layui-icon-picture" style="font-size: 30px; color: #1E9FFF;"></i><br>素材</li>				    
+				  </ul>
+				  <div class="layui-tab-content" style="height: 100px;">
+				    <div class="layui-tab-item layui-show">
+					    <div class="layui-row" align="center">
+		    				<div class="layui-col-md1" v-for="item in title" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])">{{item[0]}}</button>
+							</div>
+		    			</div>				    
+				    </div>
+				    <div class="layui-tab-item">2</div>
+				    <div class="layui-tab-item">3</div>
+				    <div class="layui-tab-item">4</div>
+				    <div class="layui-tab-item">5</div>
+				    <div class="layui-tab-item">6</div>
+				    <div class="layui-tab-item">7</div>
+				  </div>
+				</div>				    		
 			</div>
-<script src="//res.layui.com/layui/dist/layui.js?t=1554901097999"></script>
+
 <script src="js/layui.all.js"></script>
 <script src="js/layui.js"></script>		
 <script src="js/jquery-3.2.1/jquery-3.2.1.js"></script>
@@ -54,11 +74,12 @@ var vm = new Vue({
     el:'#container',
     data:{
         msg:'Hello World!',
-        title:[["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"]]
+        title:[["百度","https://www.baidu.com/"],["Bing","https://cn.bing.com/"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"]]
     },
     methods:{
-        get:function(){
-            
+        getOnclick:function(url){
+        	//window.open(url+"s?wd=林明祥")
+        	window.open(url)
         }
     }
 });}
