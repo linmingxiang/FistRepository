@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>我的网站收藏 - Lin</title>
+  <link rel="stylesheet" href="css/layui.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="assets/waifu.min.css?v=1.4.2"/>
+</head>
+<body class="layui-layout-body" >
+<div class="layui-layout layui-layout-admin">
+
+	
+  <div class="layui-header">
+    <div class="layui-logo">丹- 网站收藏</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a onclick="Route('baidu')">Baidu</a></li>
+      <li class="layui-nav-item"><a onclick="Route('bing')">Bing</a></li>
+      <li class="layui-nav-item"><a onclick="Route('sogou')">Sogou</a></li>
+      <li class="layui-nav-item"><a href="https://www.google.com" title="使用Google搜索需要翻墙，不懂联系楼主！">Google</a></li>
+    </ul>
+    <!--<ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          LinMingXiang
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">添加</a></dd>
+          <dd><a href="">添加</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">退了</a></li>
+    </ul>-->
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('1')">快捷搜索</a></li>
+        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('2')">开发助手</a></li>    
+        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('3')">影视音乐</a></li>
+        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('4')">微信号</a></li>       
+        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('5')">电脑守护</a></li>
+        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('6')">便捷生活</a></li>
+        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('7')">素材</a></li>
+     
+      </ul>
+    </div>
+  </div>
+  <!--<div class="waifu">
+        <div class="waifu-tips"></div>
+        <canvas id="live2d" class="live2d"></canvas>
+        <div class="waifu-tool">
+            <span class="fui-home"></span>
+            <span class="fui-chat"></span>
+            <span class="fui-eye"></span>
+            <span class="fui-user"></span>
+            <span class="fui-photo"></span>
+            <span class="fui-info-circle"></span>
+            <span class="fui-cross"></span>
+        </div>
+    </div>-->
+  
+  <div class="layui-body" id="divId">
+    <!-- 内容主体区域 -->  
+    <!--2D板娘-->
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © Lin.com - Lin收藏
+  </div>
+  
+  
+  
+</div>
+
+
+<script src="js/layui.all.js"></script>
+<script src="js/layui.js"></script>
+<script src="js/jquery-3.2.1/jquery-3.2.1.js"></script>
+<script src="js/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+		/*JavaScript代码区域*/
+   Route = function(data){
+   /*头部导航栏*/
+  if(data=='baidu'){
+   $('#divId').load('Subpage/Baidu.html');    	
+   }
+   	if(data=='bing'){
+   	$('#divId').load('Subpage/Bing.html');
+   }
+   if(data=='sogou'){
+   $('#divId').load('Subpage/Sogou.html');
+   }
+   /*左侧导航栏*/
+   if(data=='1'){
+   $('#divId').load('Subpage/QuickSearch.html');    	
+   }
+   	if(data=='2'){
+   	$('#divId').load('Subpage/Development.html');
+   }
+   if(data=='3'){
+   $('#divId').load('Subpage/Audiovisual.html');
+   }
+   if(data=='4'){
+   $('#divId').load('Subpage/WeiXinHao.html');
+   }
+   if(data=='5'){
+   $('#divId').load('Subpage/Computer.html');
+   }
+   if(data=='6'){
+   $('#divId').load('Subpage/ConvenientLife.html');
+   }
+   if(data=='7'){
+   $('#divId').load('Subpage/SuCai.html');
+   }
+   };
+   /*初始化加载的页面*/
+   $(function(){
+   	$('#divId').load('Subpage/Subpage.html'); 
+   });
+</script>
+</body>
+</html>
