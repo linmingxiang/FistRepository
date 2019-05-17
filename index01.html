@@ -62,20 +62,27 @@ html,body
 				</div>				    		
 			</div>
 
-<script src="js/layui.all.js"></script>
-<script src="js/layui.js"></script>		
-<script src="js/jquery-3.2.1/jquery-3.2.1.js"></script>
-<script src="js/jquery-3.2.1/jquery-3.2.1.min.js"></script>	
-<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
-<script>
+	<script src="js/layui.all.js"></script>
+	<script src="js/layui.js"></script>
+	<script src="js/jquery-3.2.1/jquery-3.2.1.js"></script>
+	<script src="js/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+	<script>
 window.onload = function(){
 var vm = new Vue({
     el:'#container',
     data:{
         msg:'Hello World!',
+        obj:null,
         title:[["百度","https://www.baidu.com/"],["Bing","https://cn.bing.com/"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"]]
     },
+    mounted () {
+        //初始化获取本地天气
+        $.get("https://www.tianqiapi.com/api/?version=v1",function (data) {
+			console.log("data",data)
+        })
+	},
     methods:{
         getOnclick:function(url){
         	//window.open(url+"s?wd=林明祥")
@@ -84,5 +91,5 @@ var vm = new Vue({
     }
 });}
 </script>
-	</body>
+</body>
 </html>
