@@ -6,6 +6,9 @@
 		  <link rel="stylesheet" href="css/layui.css">
 		  <link rel="stylesheet" href="css/style.css" />		  
 		  <link rel="stylesheet" type="text/css" href="assets/waifu.min.css?v=1.4.2"/>
+		  <meta name="renderer" content="webkit">
+		  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<style>
 body
 {	
@@ -22,7 +25,7 @@ html,body
 	position: absolute;
 	width:40%;
 	height:45%;
-	left:20%;top:40%; 
+	left:20%;top:40%;
 	margin-left:-200px;
 	margin-top:-100px;
 	/*border:1px solid #00F*/
@@ -31,10 +34,27 @@ html,body
 </style>
 </head>	
 	<body>
-		<div id="container"> 
-			<div class="layui-row">
-				
-				<div class="layui-tab layui-tab-card01">
+	<div id="WebDiv" style="width: 100%;height: 100%">
+		<div id="container">
+			<!--搜索-->
+			<div class="layui-row">					
+				<div class="layui-col-md2">
+					<select class="layui-select" name="interest" lay-filter="aihao" style="width: 100%;"  v-model="searchTop">
+			          <option value="https://www.baidu.com/s?wd=" selected="">BaiDu</option>
+			          <option value="https://cn.bing.com/search?q=">Bing</option>
+			          <option value="https://www.google.com/search?q=">Google</option>
+			        </select>
+		        </div>
+		        <div class="layui-col-md8">				
+        			<input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input" v-model="searchContent">
+				</div>					
+		        <div class="layui-col-md1 layui-col-md-offset1">
+		        	<button class="layui-btn layui-btn-primary layui-btn-radius" v-on:click="goSearch()"><i class="layui-icon layui-icon-search" style="font-size: 30px; color: #1E9FFF;"></i></button>	
+	        	</div>	        	
+			</div>
+			<!-- 常用网站-->
+			<div class="layui-row">									    					    			      			   					
+				<div class="layui-tab layui-tab-card01">					
 				  <ul class="layui-tab-title">
 				    <li class="layui-this"><i class="layui-icon layui-icon-home" style="font-size: 30px; color: #1E9FFF;"></i><br>常用网站</li>
 				    <li ><i class="layui-icon layui-icon-video" style="font-size: 30px; color: #1E9FFF;"></i><br>影视影音</li>				   
@@ -44,52 +64,111 @@ html,body
 				    <li ><i class="layui-icon layui-icon-login-wechat" style="font-size: 30px; color: #1E9FFF;"></i><br>微信号</li>
 				    <li ><i class="layui-icon layui-icon-picture" style="font-size: 30px; color: #1E9FFF;"></i><br>素材</li>				    
 				  </ul>
-				  <div class="layui-tab-content" style="height: 100px;">
+				  <div class="layui-tab-content" style="height: 200px;">
 				    <div class="layui-tab-item layui-show">
 					    <div class="layui-row" align="center">
-		    				<div class="layui-col-md1" v-for="item in title" style="margin: 5px 5px;">
+		    				<div class="layui-col-md2" v-for="item in title01" style="margin: 5px 5px;">
 								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])">{{item[0]}}</button>
 							</div>
 		    			</div>				    
 				    </div>
 				    <div class="layui-tab-item">2</div>
-				    <div class="layui-tab-item">3</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in title03" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])">{{item[0]}}</button>
+							</div>
+						</div>
+					</div>
 				    <div class="layui-tab-item">4</div>
 				    <div class="layui-tab-item">5</div>
 				    <div class="layui-tab-item">6</div>
 				    <div class="layui-tab-item">7</div>
 				  </div>
-				</div>				    		
+				</div>
 			</div>
-
+        </div>
+        <!--浏览器界面-->
+        <div class="layui-row"  v-show="isShowWeb01" style="width:100%;height: 100%">
+            <div id="" class="layui-col-md5 layui-col-md-offset7" style="width:100%; height:100%">
+				<object id="TvObj" v-if="isShowTv01" width="90%" height="100%" :data="goSearchContent01" style="align-content: center"></object>
+            </div>
+        </div>
+		<div class="layui-row"  v-show="isShowWeb02" style="width:100%;height: 100%">
+			<div id="jieming" class="layui-col-md5 layui-col-md-offset7" style="width:100%; height:100%">
+				<object id="TvObj01" v-if="isShowTv02" width="90%" height="100%" :data="goSearchContent02" style="align-content: center"></object>
+			</div>
+		</div>
 	<script src="js/layui.all.js"></script>
 	<script src="js/layui.js"></script>
 	<script src="js/jquery-3.2.1/jquery-3.2.1.js"></script>
 	<script src="js/jquery-3.2.1/jquery-3.2.1.min.js"></script>
 	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
 	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
 	<script>
 window.onload = function(){
 var vm = new Vue({
-    el:'#container',
+    el:'#WebDiv',
     data:{
         msg:'Hello World!',
+        goSearchContent:'https://www.baidu.com/',
         obj:null,
-        title:[["百度","https://www.baidu.com/"],["Bing","https://cn.bing.com/"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"],["百度","1"]]
+        JMWidth:500,
+        JMHeight:700,
+        searchTop:'https://www.baidu.com/s?wd=',
+        searchContent:'',
+		i:1,
+        isShowWeb01:false,
+        isShowWeb02:false,
+        isShowTv01:false,
+        isShowTv02:false,
+        goSearchContent01:'',
+        goSearchContent01:'',
+        title01:[["微博","https://weibo.com/"],["知网","https://www.zhihu.com/"],["汉典网","http://www.zdic.net/"],
+				["用药助手","http://drugs.dxy.cn/index.htm"],["BookSC","http://zh.booksc.org/"],
+				["喵搜番剧","https://nyaso.com/"],
+		],
+        title03:[["在线邮箱","http://bccto.me/"],["在线抠图","https://www.gaoding.com/koutu"],["在线剪辑音乐","https://mp3cut.net/cn/"],
+            	["在线录制视频","http://www.zdic.net/"],["在线压缩图片","https://www.picdiet.com/zh-cn"],["在线压缩裁剪","http://drugs.dxy.cn/index.htm"],
+            	["AI图片放大","http://bigjpg.com/"],["在线阅读","https://epub.yunser.com/"],["在线PDF工具","https://smallpdf.com/cn"],
+        ],
     },
     mounted () {
         //初始化获取本地天气
         $.get("https://www.tianqiapi.com/api/?version=v1",function (data) {
 			console.log("data",data)
-        })
+        });
 	},
     methods:{
+    	//搜索
+    	goSearch:function(){
+
+			if(this.i >= 1){
+                if(this.i%2 == 0)
+                {
+                    this.goSearchContent02 = this.searchTop+this.searchContent
+                    this.isShowWeb01 = false
+                    this.isShowWeb02 = true
+                    this.isShowTv02 = true
+					this.isShowTv01 = false
+                    this.i = this.i + 1
+                } else {
+                    this.goSearchContent01= this.searchTop+this.searchContent
+                    this.isShowWeb01 = true
+                    this.isShowWeb02 = false
+                    this.isShowTv01 = true
+					this.isShowTv02 = false
+                    this.i = this.i + 1
+                }
+			}
+        },
         getOnclick:function(url){
-        	//window.open(url+"s?wd=林明祥")
         	window.open(url)
         }
     }
 });}
 </script>
-</body>
+	</div>
+    </body>
 </html>
