@@ -45,12 +45,15 @@ html,body
 			          <option value="https://www.google.com/search?q=">Google</option>
 			        </select>
 		        </div>
-		        <div class="layui-col-md8">				
+		        <div class="layui-col-md6">
         			<input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input" v-model="searchContent">
 				</div>					
 		        <div class="layui-col-md1 layui-col-md-offset1">
-		        	<button class="layui-btn layui-btn-primary layui-btn-radius" v-on:click="goSearch()"><i class="layui-icon layui-icon-search" style="font-size: 30px; color: #1E9FFF;"></i></button>	
-	        	</div>	        	
+		        	<button class="layui-btn layui-btn-primary layui-btn-radius" v-on:click="goSearch()"><i  class="layui-icon layui-icon-search" style="font-size: 30px; color: #1E9FFF;"></i></button>
+	        	</div>
+                <div class="layui-col-md1 layui-col-md-offset1">
+                    <a v-on:click="goRefresh()" title="刷新"><i  class="layui-icon layui-icon-refresh-3" style="font-size: 24px; color: #ffe564;"></i></a>
+                </div>
 			</div>
 			<!-- 常用网站-->
 			<div class="layui-row">									    					    			      			   					
@@ -68,25 +71,106 @@ html,body
 				    <div class="layui-tab-item layui-show">
 					    <div class="layui-row" align="center">
 		    				<div class="layui-col-md2" v-for="item in title01" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])">{{item[0]}}</button>
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
 							</div>
 		    			</div>				    
 				    </div>
-				    <div class="layui-tab-item">2</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in title02" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in title02_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            </div>
+                        </div>
+					</div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
 							<div class="layui-col-md2" v-for="item in title03" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])">{{item[0]}}</button>
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
 							</div>
 						</div>
 					</div>
-				    <div class="layui-tab-item">4</div>
-				    <div class="layui-tab-item">5</div>
-				    <div class="layui-tab-item">6</div>
-				    <div class="layui-tab-item">7</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in title04" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in title04_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            </div>
+                        </div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in title05" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in title05_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            </div>
+                        </div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in title05_2" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            </div>
+                        </div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in title05_3" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            </div>
+                        </div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in title06" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in title06_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            </div>
+                        </div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in title06_2" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            </div>
+                        </div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in title07" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							</div>
+						</div>
+					</div>
+
 				  </div>
 				</div>
 			</div>
+			<!--视频解析、游戏音乐购物等等-->
+            <div class="layui-row">
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(1)" ><img border="0" src="images/img/tv.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(2)" ><img border="0" src="images/img/yy.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(3)" ><img border="0" src="images/img/gw.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(4)" ><img border="0" src="images/img/yq.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+            </div>
         </div>
         <!--浏览器界面-->
         <div class="layui-row"  v-show="isShowWeb01" style="width:100%;height: 100%">
@@ -114,8 +198,7 @@ var vm = new Vue({
         msg:'Hello World!',
         goSearchContent:'https://www.baidu.com/',
         obj:null,
-        JMWidth:500,
-        JMHeight:700,
+        weatherDate:null,
         searchTop:'https://www.baidu.com/s?wd=',
         searchContent:'',
 		i:1,
@@ -124,26 +207,56 @@ var vm = new Vue({
         isShowTv01:false,
         isShowTv02:false,
         goSearchContent01:'',
-        goSearchContent01:'',
+        goSearchContent02:'',
         title01:[["微博","https://weibo.com/"],["知网","https://www.zhihu.com/"],["汉典网","http://www.zdic.net/"],
 				["用药助手","http://drugs.dxy.cn/index.htm"],["BookSC","http://zh.booksc.org/"],
 				["喵搜番剧","https://nyaso.com/"],
 		],
+		title02:[["腾旭视频","https://v.qq.com/"],["爱奇艺","https://www.iqiyi.com/"],["哔哩哔哩","https://www.bilibili.com/"],["优酷视频","https://www.youku.com/"],["芒果TV","https://www.mgtv.com/"],["YouToBe","https://www.youtube.com/"],
+			["ok资源网","http://www.okzy.me/"],["全民解析","http://vi1.cc/"],["玩的嗨","http://tv.wandhi.com"],["玩的嗨解析","http://tv.wandhi.com/go.html"],["喵搜番剧","https://nyaso.com/"],
+            ["电影王国","https://www.moviewg.com/"],["中国高清网","http://gaoqing.la/"],["思享","http://www.ibtbb.com/"],["优质电影网","http://www.youzhidy.com/"],["6V电影网","http://www.6vhao.tv/"],
+            ["韩剧网","http://www.hanju.cc/"],
+        ],
+        title02_1:[["酷狗音乐","https://www.iqiyi.com/"],["QQ音乐","https://www.bilibili.com/"],["网易云音乐","https://music.163.com/"],["音悦Tai","https://www.yinyuetai.com/"],
+
+        ],
         title03:[["在线邮箱","http://bccto.me/"],["在线抠图","https://www.gaoding.com/koutu"],["在线剪辑音乐","https://mp3cut.net/cn/"],
             	["在线录制视频","http://www.zdic.net/"],["在线压缩图片","https://www.picdiet.com/zh-cn"],["在线压缩裁剪","http://drugs.dxy.cn/index.htm"],
             	["AI图片放大","http://bigjpg.com/"],["在线阅读","https://epub.yunser.com/"],["在线PDF工具","https://smallpdf.com/cn"],
         ],
-    },
+        title04:[["笔记本推荐网","http://www.fzmo.cn/"],["台式组装网","http://www.dnpz.net/"],["太平洋电脑网","https://www.pconline.com.cn/"],
+        ],
+        title04_1:[["系统之家","http://www.xitongzhijia.net"],["吾爱破解","https://www.52pojie.cn/"],
+        ],
+        title05:[["GitHub社区","https://github.com/"],["花生壳","https://hsk.oray.com/"],
+        ],
+        title05_1:[["Vue框架","https://cn.vuejs.org/"],["菜鸟教程","http://www.runoob.com/"],["w3school","http://www.w3school.com.cn/"],["LayUI前端框架","https://www.layui.com/demo/button.html"],["iview前端框架1","https://www.iviewui.com/docs/guide/install"],["iview前端框架2","http://v1.iviewui.com/docs/guide/install"],
+        ],
+        title05_2:[["黑马视频-java","https://mp.weixin.qq.com"],["慕课网","https://www.imooc.com/"],["Guns框架","https://www.imooc.com/video/16386"],
+        ],
+        title05_3:[["微信开发文档","https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1455784140"],["接口签名校验","http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign"],["微信测试号","https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index"],
+        ],
+        title06:[["微信公众号","https://mp.weixin.qq.com/"],["橙秀H5","https://www.xiu.top/"],["兔  展","https://www.rabbitpre.com/"],
+        ],
+        title06_1:[["96编辑器","http://bj.96weixin.com/"],["秀米编辑器","https://xiumi.us/studio/v5#/index"],["i排版","http://ipaiban.com/"],["135编辑器","http://www.135editor.com/"],
+        ],
+        title06_2:[["videvo","https://www.videvo.net/"],["图虫创意","https://stock.tuchong.com/"],["Pexels图片","https://www.pexels.com/"],["斗图啦","http://www.doutula.com/"],["动图制","http://www.gif5.net/"],
+        ],
+
+        title07:[["Pexels图片","https://www.pexels.com/"],["在线抠图","https://www.gaoding.com/koutu"],["在线剪辑音乐","https://mp3cut.net/cn/"],
+        ],
+	},
     mounted () {
         //初始化获取本地天气
         $.get("https://www.tianqiapi.com/api/?version=v1",function (data) {
-			console.log("data",data)
+            this.weatherDate = data
+			console.log("this.weatherDate",this.weatherDate)
         });
 	},
     methods:{
     	//搜索
     	goSearch:function(){
-
+    	    //搜索框来回切换
 			if(this.i >= 1){
                 if(this.i%2 == 0)
                 {
@@ -163,8 +276,24 @@ var vm = new Vue({
                 }
 			}
         },
+        //刷新页面
+        goRefresh:function(){
+    	    location.reload()
+        },
         getOnclick:function(url){
         	window.open(url)
+        },
+        goPlan:function (index) {
+			switch (index) {
+				case 1 :
+				    return window.open("Subpage/CrackVIP.html");
+				case 2 :
+                    return window.open("https://www.kugou.com/");
+                case 3 :
+                    return window.open("https://www.taobao.com/");
+                case 4 :
+                    return window.open("http://www.4399.com/");
+            }
         }
     }
 });}
