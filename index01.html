@@ -70,85 +70,85 @@ html,body
 				  <div class="layui-tab-content" style="height: 200px;">
 				    <div class="layui-tab-item layui-show">
 					    <div class="layui-row" align="center">
-		    				<div class="layui-col-md2" v-for="item in title01" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+		    				<div class="layui-col-md2" v-for="item in dataJson.title01" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
 							</div>
 		    			</div>				    
 				    </div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
-							<div class="layui-col-md2" v-for="item in title02" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							<div class="layui-col-md2" v-for="item in dataJson.title02" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
 							</div>
 						</div>
                         <div class="layui-row" align="center">
-                            <div class="layui-col-md2" v-for="item in title02_1" style="margin: 5px 5px;">
-                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            <div class="layui-col-md2" v-for="item in dataJson.title02_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
                             </div>
                         </div>
 					</div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
-							<div class="layui-col-md2" v-for="item in title03" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							<div class="layui-col-md2" v-for="item in dataJson.title03" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
 							</div>
 						</div>
 					</div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
-							<div class="layui-col-md2" v-for="item in title04" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							<div class="layui-col-md2" v-for="item in dataJson.title04" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
 							</div>
 						</div>
                         <div class="layui-row" align="center">
-                            <div class="layui-col-md2" v-for="item in title04_1" style="margin: 5px 5px;">
-                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            <div class="layui-col-md2" v-for="item in dataJson.title04_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
                             </div>
                         </div>
 					</div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
-							<div class="layui-col-md2" v-for="item in title05" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							<div class="layui-col-md2" v-for="item in dataJson.title05" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
 							</div>
 						</div>
                         <div class="layui-row" align="center">
-                            <div class="layui-col-md2" v-for="item in title05_1" style="margin: 5px 5px;">
-                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            <div class="layui-col-md2" v-for="item in dataJson.title05_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
                             </div>
                         </div>
                         <div class="layui-row" align="center">
-                            <div class="layui-col-md2" v-for="item in title05_2" style="margin: 5px 5px;">
-                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            <div class="layui-col-md2" v-for="item in dataJson.title05_2" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
                             </div>
                         </div>
                         <div class="layui-row" align="center">
-                            <div class="layui-col-md2" v-for="item in title05_3" style="margin: 5px 5px;">
-                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            <div class="layui-col-md2" v-for="item in dataJson.title05_3" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
                             </div>
                         </div>
 					</div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
-							<div class="layui-col-md2" v-for="item in title06" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							<div class="layui-col-md2" v-for="item in dataJson.title06" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
 							</div>
 						</div>
                         <div class="layui-row" align="center">
-                            <div class="layui-col-md2" v-for="item in title06_1" style="margin: 5px 5px;">
-                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            <div class="layui-col-md2" v-for="item in dataJson.title06_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
                             </div>
                         </div>
                         <div class="layui-row" align="center">
-                            <div class="layui-col-md2" v-for="item in title06_2" style="margin: 5px 5px;">
-                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+                            <div class="layui-col-md2" v-for="item in dataJson.title06_2" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
                             </div>
                         </div>
 					</div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
-							<div class="layui-col-md2" v-for="item in title07" style="margin: 5px 5px;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item[1])" style="width: 100px">{{item[0]}}</button>
+							<div class="layui-col-md2" v-for="item in dataJson.title07" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
 							</div>
 						</div>
 					</div>
@@ -208,45 +208,14 @@ var vm = new Vue({
         isShowTv02:false,
         goSearchContent01:'',
         goSearchContent02:'',
-        title01:[["微博","https://weibo.com/"],["知网","https://www.zhihu.com/"],["汉典网","http://www.zdic.net/"],
-				["用药助手","http://drugs.dxy.cn/index.htm"],["BookSC","http://zh.booksc.org/"],
-				["喵搜番剧","https://nyaso.com/"],
-		],
-		title02:[["腾旭视频","https://v.qq.com/"],["爱奇艺","https://www.iqiyi.com/"],["哔哩哔哩","https://www.bilibili.com/"],["优酷视频","https://www.youku.com/"],["芒果TV","https://www.mgtv.com/"],["YouToBe","https://www.youtube.com/"],
-			["ok资源网","http://www.okzy.me/"],["全民解析","http://vi1.cc/"],["玩的嗨","http://tv.wandhi.com"],["玩的嗨解析","http://tv.wandhi.com/go.html"],["喵搜番剧","https://nyaso.com/"],
-            ["电影王国","https://www.moviewg.com/"],["中国高清网","http://gaoqing.la/"],["思享","http://www.ibtbb.com/"],["优质电影网","http://www.youzhidy.com/"],["6V电影网","http://www.6vhao.tv/"],
-            ["韩剧网","http://www.hanju.cc/"],
-        ],
-        title02_1:[["酷狗音乐","https://www.iqiyi.com/"],["QQ音乐","https://www.bilibili.com/"],["网易云音乐","https://music.163.com/"],["音悦Tai","https://www.yinyuetai.com/"],
-
-        ],
-        title03:[["在线邮箱","http://bccto.me/"],["在线抠图","https://www.gaoding.com/koutu"],["在线剪辑音乐","https://mp3cut.net/cn/"],
-            	["在线录制视频","http://www.zdic.net/"],["在线压缩图片","https://www.picdiet.com/zh-cn"],["在线压缩裁剪","http://drugs.dxy.cn/index.htm"],
-            	["AI图片放大","http://bigjpg.com/"],["在线阅读","https://epub.yunser.com/"],["在线PDF工具","https://smallpdf.com/cn"],
-        ],
-        title04:[["笔记本推荐网","http://www.fzmo.cn/"],["台式组装网","http://www.dnpz.net/"],["太平洋电脑网","https://www.pconline.com.cn/"],
-        ],
-        title04_1:[["系统之家","http://www.xitongzhijia.net"],["吾爱破解","https://www.52pojie.cn/"],
-        ],
-        title05:[["GitHub社区","https://github.com/"],["花生壳","https://hsk.oray.com/"],
-        ],
-        title05_1:[["Vue框架","https://cn.vuejs.org/"],["菜鸟教程","http://www.runoob.com/"],["w3school","http://www.w3school.com.cn/"],["LayUI前端框架","https://www.layui.com/demo/button.html"],["iview前端框架1","https://www.iviewui.com/docs/guide/install"],["iview前端框架2","http://v1.iviewui.com/docs/guide/install"],
-        ],
-        title05_2:[["黑马视频-java","https://mp.weixin.qq.com"],["慕课网","https://www.imooc.com/"],["Guns框架","https://www.imooc.com/video/16386"],
-        ],
-        title05_3:[["微信开发文档","https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1455784140"],["接口签名校验","http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign"],["微信测试号","https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index"],
-        ],
-        title06:[["微信公众号","https://mp.weixin.qq.com/"],["橙秀H5","https://www.xiu.top/"],["兔  展","https://www.rabbitpre.com/"],
-        ],
-        title06_1:[["96编辑器","http://bj.96weixin.com/"],["秀米编辑器","https://xiumi.us/studio/v5#/index"],["i排版","http://ipaiban.com/"],["135编辑器","http://www.135editor.com/"],
-        ],
-        title06_2:[["videvo","https://www.videvo.net/"],["图虫创意","https://stock.tuchong.com/"],["Pexels图片","https://www.pexels.com/"],["斗图啦","http://www.doutula.com/"],["动图制","http://www.gif5.net/"],
-        ],
-
-        title07:[["Pexels图片","https://www.pexels.com/"],["在线抠图","https://www.gaoding.com/koutu"],["在线剪辑音乐","https://mp3cut.net/cn/"],
-        ],
+		dataJson:{},
 	},
     mounted () {
+        //初始化,获取解析数据
+        const me = this;
+        me.$http.get('js/data.json').then(res=>{
+            me.dataJson = res.body;
+        })
         //初始化获取本地天气
         $.get("https://www.tianqiapi.com/api/?version=v1",function (data) {
             this.weatherDate = data
