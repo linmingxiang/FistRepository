@@ -1,128 +1,272 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>我的网站收藏 - Lin</title>
-  <link rel="stylesheet" href="css/layui.css">
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" href="assets/waifu.min.css?v=1.4.2"/>
-</head>
-<body class="layui-layout-body" >
-<div class="layui-layout layui-layout-admin">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		  <link rel="stylesheet" href="css/layui.css">
+		  <link rel="stylesheet" href="css/style.css" />		  
+		  <link rel="stylesheet" type="text/css" href="assets/waifu.min.css?v=1.4.2"/>
+		  <meta name="renderer" content="webkit">
+		  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<style>
+body
+{	
+	background: url(images/img/006.jpg) no-repeat; 
+	background-size:100% 100%;		
+}
+html,body
+{
+	width: 100%;
+	height: 100%;
+}
+#container
+{
+	position: absolute;
+	width:40%;
+	height:45%;
+	left:20%;top:40%;
+	margin-left:-200px;
+	margin-top:-100px;
+	/*border:1px solid #00F*/
+}
 
-	
-  <div class="layui-header">
-    <div class="layui-logo">丹- 网站收藏</div>
-    <!-- 头部区域（可配合layui已有的水平导航） -->
-    <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a onclick="Route('baidu')">Baidu</a></li>
-      <li class="layui-nav-item"><a onclick="Route('bing')">Bing</a></li>
-      <li class="layui-nav-item"><a onclick="Route('sogou')">Sogou</a></li>
-      <li class="layui-nav-item"><a href="https://www.google.com" title="使用Google搜索需要翻墙，不懂联系楼主！">Google</a></li>
-    </ul>
-    <!--<ul class="layui-nav layui-layout-right">
-      <li class="layui-nav-item">
-        <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          LinMingXiang
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="">添加</a></dd>
-          <dd><a href="">添加</a></dd>
-        </dl>
-      </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
-    </ul>-->
-  </div>
-  
-  <div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
-      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('1')">快捷搜索</a></li>
-        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('2')">开发助手</a></li>    
-        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('3')">影视音乐</a></li>
-        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('4')">微信号</a></li>       
-        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('5')">电脑守护</a></li>
-        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('6')">便捷生活</a></li>
-        <li class="layui-nav-item layui-nav-itemed"><a class="" onclick="Route('7')">素材</a></li>
-     
-      </ul>
-    </div>
-  </div>
-  <!--<div class="waifu">
-        <div class="waifu-tips"></div>
-        <canvas id="live2d" class="live2d"></canvas>
-        <div class="waifu-tool">
-            <span class="fui-home"></span>
-            <span class="fui-chat"></span>
-            <span class="fui-eye"></span>
-            <span class="fui-user"></span>
-            <span class="fui-photo"></span>
-            <span class="fui-info-circle"></span>
-            <span class="fui-cross"></span>
+</style>
+</head>	
+	<body>
+	<div id="WebDiv" style="width: 100%;height: 100%">
+		<div id="container">
+			<!--搜索-->
+			<div class="layui-row">					
+				<div class="layui-col-md2">
+					<select class="layui-select" name="interest" lay-filter="aihao" style="width: 100%;"  v-model="searchTop">
+			          <option value="https://www.baidu.com/s?wd=" selected="">BaiDu</option>
+			          <option value="https://cn.bing.com/search?q=">Bing</option>
+			          <option value="https://www.google.com/search?q=">Google</option>
+			        </select>
+		        </div>
+		        <div class="layui-col-md6">
+        			<input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input" v-model="searchContent">
+				</div>					
+		        <div class="layui-col-md1 layui-col-md-offset1">
+		        	<button class="layui-btn layui-btn-primary layui-btn-radius" v-on:click="goSearch()"><i  class="layui-icon layui-icon-search" style="font-size: 30px; color: #1E9FFF;"></i></button>
+	        	</div>
+                <div class="layui-col-md1 layui-col-md-offset1">
+                    <a v-on:click="goRefresh()" title="刷新"><i  class="layui-icon layui-icon-refresh-3" style="font-size: 24px; color: #ffe564;"></i></a>
+                </div>
+			</div>
+			<!-- 常用网站-->
+			<div class="layui-row">									    					    			      			   					
+				<div class="layui-tab layui-tab-card01">					
+				  <ul class="layui-tab-title">
+				    <li class="layui-this"><i class="layui-icon layui-icon-home" style="font-size: 30px; color: #1E9FFF;"></i><br>常用网站</li>
+				    <li ><i class="layui-icon layui-icon-video" style="font-size: 30px; color: #1E9FFF;"></i><br>影视影音</li>				   
+				    <li ><i class="layui-icon layui-icon-util" style="font-size: 30px; color: #1E9FFF;"></i><br>在线工具</li>				   
+				    <li ><i class="layui-icon layui-icon-reply-fill" style="font-size: 30px; color: #1E9FFF;"></i><br>电脑小知识</li>
+				    <li ><i class="layui-icon layui-icon-app" style="font-size: 30px; color: #1E9FFF;"></i><br>工作助手</li>
+				    <li ><i class="layui-icon layui-icon-login-wechat" style="font-size: 30px; color: #1E9FFF;"></i><br>微信号</li>
+				    <li ><i class="layui-icon layui-icon-picture" style="font-size: 30px; color: #1E9FFF;"></i><br>素材</li>				    
+				  </ul>
+				  <div class="layui-tab-content" style="height: 200px;">
+				    <div class="layui-tab-item layui-show">
+					    <div class="layui-row" align="center">
+		    				<div class="layui-col-md2" v-for="item in dataJson.title01" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+							</div>
+		    			</div>				    
+				    </div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in dataJson.title02" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in dataJson.title02_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                            </div>
+                        </div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in dataJson.title03" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+							</div>
+						</div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in dataJson.title04" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in dataJson.title04_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                            </div>
+                        </div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in dataJson.title05" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in dataJson.title05_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                            </div>
+                        </div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in dataJson.title05_2" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                            </div>
+                        </div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in dataJson.title05_3" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                            </div>
+                        </div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in dataJson.title06" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+							</div>
+						</div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in dataJson.title06_1" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                            </div>
+                        </div>
+                        <div class="layui-row" align="center">
+                            <div class="layui-col-md2" v-for="item in dataJson.title06_2" style="margin: 5px 5px;">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                            </div>
+                        </div>
+					</div>
+				    <div class="layui-tab-item">
+						<div class="layui-row" align="center">
+							<div class="layui-col-md2" v-for="item in dataJson.title07" style="margin: 5px 5px;">
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+							</div>
+						</div>
+					</div>
+
+				  </div>
+				</div>
+			</div>
+			<!--视频解析、游戏音乐购物等等-->
+            <div class="layui-row">
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(1)" ><img border="0" src="images/img/tv.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(2)" ><img border="0" src="images/img/yy.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(3)" ><img border="0" src="images/img/gw.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+					<div class="layui-col-md2">
+						<a v-on:click="goPlan(4)" ><img border="0" src="images/img/yq.png" alt="Pulpit rock" width="64" height="64"></a>
+					</div>
+            </div>
         </div>
-    </div>-->
-  
-  <div class="layui-body" id="divId">
-    <!-- 内容主体区域 -->  
-    <!--2D板娘-->
-  </div>
-  
-  <div class="layui-footer">
-    <!-- 底部固定区域 -->
-    © Lin.com - Lin收藏
-  </div>
-  
-  
-  
-</div>
+        <!--浏览器界面-->
+        <div class="layui-row"  v-show="isShowWeb01" style="width:100%;height: 100%">
+            <div id="" class="layui-col-md5 layui-col-md-offset7" style="width:100%; height:100%">
+				<object id="TvObj" v-if="isShowTv01" width="90%" height="100%" :data="goSearchContent01" style="align-content: center"></object>
+            </div>
+        </div>
+		<div class="layui-row"  v-show="isShowWeb02" style="width:100%;height: 100%">
+			<div id="jieming" class="layui-col-md5 layui-col-md-offset7" style="width:100%; height:100%">
+				<object id="TvObj01" v-if="isShowTv02" width="90%" height="100%" :data="goSearchContent02" style="align-content: center"></object>
+			</div>
+		</div>
+	<script src="js/layui.all.js"></script>
+	<script src="js/layui.js"></script>
+	<script src="js/jquery-3.2.1/jquery-3.2.1.js"></script>
+	<script src="js/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+	<script src="js/vue.min.js"></script>
+    <script src="js/vue-resource/vue-resource.min.js"></script>
 
-
-<script src="js/layui.all.js"></script>
-<script src="js/layui.js"></script>
-<script src="js/jquery-3.2.1/jquery-3.2.1.js"></script>
-<script src="js/jquery-3.2.1/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-		/*JavaScript代码区域*/
-   Route = function(data){
-   /*头部导航栏*/
-  if(data=='baidu'){
-   $('#divId').load('Subpage/Baidu.html');    	
-   }
-   	if(data=='bing'){
-   	$('#divId').load('Subpage/Bing.html');
-   }
-   if(data=='sogou'){
-   $('#divId').load('Subpage/Sogou.html');
-   }
-   /*左侧导航栏*/
-   if(data=='1'){
-   $('#divId').load('Subpage/QuickSearch.html');    	
-   }
-   	if(data=='2'){
-   	$('#divId').load('Subpage/Development.html');
-   }
-   if(data=='3'){
-   $('#divId').load('Subpage/Audiovisual.html');
-   }
-   if(data=='4'){
-   $('#divId').load('Subpage/WeiXinHao.html');
-   }
-   if(data=='5'){
-   $('#divId').load('Subpage/Computer.html');
-   }
-   if(data=='6'){
-   $('#divId').load('Subpage/ConvenientLife.html');
-   }
-   if(data=='7'){
-   $('#divId').load('Subpage/SuCai.html');
-   }
-   };
-   /*初始化加载的页面*/
-   $(function(){
-   	$('#divId').load('Subpage/Subpage.html'); 
-   });
+	<script>
+window.onload = function(){
+var vm = new Vue({
+    el:'#WebDiv',
+    data:{
+        msg:'Hello World!',
+        goSearchContent:'https://www.baidu.com/',
+        obj:null,
+        weatherDate:null,
+        searchTop:'https://www.baidu.com/s?wd=',
+        searchContent:'',
+		i:1,
+        isShowWeb01:false,
+        isShowWeb02:false,
+        isShowTv01:false,
+        isShowTv02:false,
+        goSearchContent01:'',
+        goSearchContent02:'',
+		dataJson:{},
+	},
+    mounted () {
+        //初始化,获取解析数据
+        const me = this;
+        me.$http.get('js/data.json').then(res=>{
+            me.dataJson = res.body;
+        })
+        //初始化获取本地天气
+        $.get("https://www.tianqiapi.com/api/?version=v1",function (data) {
+            this.weatherDate = data
+			console.log("this.weatherDate",this.weatherDate)
+        });
+	},
+    methods:{
+    	//搜索
+    	goSearch:function(){
+    	    //搜索框来回切换
+			if(this.i >= 1){
+                if(this.i%2 == 0)
+                {
+                    this.goSearchContent02 = this.searchTop+this.searchContent
+                    this.isShowWeb01 = false
+                    this.isShowWeb02 = true
+                    this.isShowTv02 = true
+					this.isShowTv01 = false
+                    this.i = this.i + 1
+                } else {
+                    this.goSearchContent01= this.searchTop+this.searchContent
+                    this.isShowWeb01 = true
+                    this.isShowWeb02 = false
+                    this.isShowTv01 = true
+					this.isShowTv02 = false
+                    this.i = this.i + 1
+                }
+			}
+        },
+        //刷新页面
+        goRefresh:function(){
+    	    location.reload()
+        },
+        getOnclick:function(url){
+        	window.open(url)
+        },
+        goPlan:function (index) {
+			switch (index) {
+				case 1 :
+				    return window.open("Subpage/CrackVIP.html");
+				case 2 :
+                    return window.open("https://www.kugou.com/");
+                case 3 :
+                    return window.open("https://www.taobao.com/");
+                case 4 :
+                    return window.open("http://www.4399.com/");
+            }
+        }
+    }
+});}
 </script>
-</body>
+	</div>
+    </body>
 </html>
