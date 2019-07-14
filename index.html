@@ -6,6 +6,7 @@
 		  <link rel="stylesheet" href="css/layui.css">
 		  <link rel="stylesheet" href="css/style.css" />		  
 		  <link rel="stylesheet" type="text/css" href="assets/waifu.min.css?v=1.4.2"/>
+          <link rel="stylesheet" href="js/iview/styles/iview.css">
 		  <meta name="renderer" content="webkit">
 		  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,6 +36,20 @@ html,body
 </head>	
 	<body>
 	<div id="WebDiv" style="width: 100%;height: 100%">
+		<div class="layui-row" style="position: absolute;margin-left: 20px">
+			<div class="layui-col-md2">
+				<Icon type="md-thunderstorm" size="100" color="#A2A2A2"/>
+
+
+
+
+			</div>
+			<div class="layui-col-md2"><Icon type="md-partly-sunny" size="100" color="#FFFFFF"/></div>
+			<div class="layui-col-md2"><Icon type="md-rainy" size="100" color="#A2A2A2"/></div>
+			<div class="layui-col-md2"><Icon type="md-snow" size="100" color="#FFFFFF"/></div>
+			<div class="layui-col-md2"><Icon type="md-sunny" size="100" color="#FFFF44"/></div>
+			<div class="layui-col-md2"></div>
+		</div>
 		<div id="container">
 			<!--搜索-->
 			<div class="layui-row">					
@@ -46,7 +61,7 @@ html,body
 			        </select>
 		        </div>
 		        <div class="layui-col-md6">
-        			<input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input" v-model="searchContent">
+        			<input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input" v-model="searchContent" v-on:keyup.enter="goSearch()">
 				</div>					
 		        <div class="layui-col-md1 layui-col-md-offset1">
 		        	<button class="layui-btn layui-btn-primary layui-btn-radius" v-on:click="goSearch()"><i  class="layui-icon layui-icon-search" style="font-size: 30px; color: #1E9FFF;"></i></button>
@@ -70,10 +85,31 @@ html,body
 				  <div class="layui-tab-content" style="height: 200px;">
 				    <div class="layui-tab-item layui-show">
 					    <div class="layui-row" align="center">
-		    				<div class="layui-col-md2" v-for="item in dataJson.title01" style="margin: 5px 5px;">
+		    				<div class="layui-col-md2" v-for="(item,index) in dataJson.title01" style="margin: 5px 5px;">
 								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" v-on:click="getOnclick(item.url)" style="width: 100px">{{item.name}}</button>
+                                <a href="#" v-show="isShoeEdit"><Icon type="md-create"  size="16"/></a>
+                                <Poptip
+                                        confirm
+                                        title="是否确定删除?"
+                                        @on-ok="onDelete(dataJson.title01,item,index)"
+                                        @on-cancel="cancel">
+                                    <a href="#" v-show="isShoeDelete"><Icon type="md-close" size="16"/></a>
+                                </Poptip>
 							</div>
-		    			</div>				    
+                            <div class="layui-col-md2 layui-col-lg-offset10">
+                                <a v-on:click="showEdit()"><Icon type="md-create" size="24"/></a>
+                                <Poptip>
+                                    <div slot="title"><i>添加网址</i></div>
+                                    <div slot="content">
+                                        <Input v-model="setName" size="small" placeholder="请输入网站名称..." /><br><br>
+                                        <Input v-model="setUrl" size="small" placeholder="请输入网站地址..." /><br><br>
+                                        <a v-on:click="addNewWeb(setName,setUrl,dataJson)">添加</a>
+                                    </div>
+                                    <a href="#"><Icon type="md-checkmark" size="24"/></a>
+                                </Poptip>
+                                <a v-on:click="showDelete()"><Icon type="md-close" size="24"/></a>
+                            </div>
+		    			</div>
 				    </div>
 				    <div class="layui-tab-item">
 						<div class="layui-row" align="center">
@@ -189,7 +225,9 @@ html,body
 	<script src="js/jquery-3.2.1/jquery-3.2.1.min.js"></script>
 	<script src="js/vue.min.js"></script>
     <script src="js/vue-resource/vue-resource.min.js"></script>
-
+    <script src="js/iview/iview.min.js"></script>
+	<script src="js/fileSaver/FileSaver.min.js"></script>
+	<script src="js/fileSaver/FileSaver.js"></script>
 	<script>
 window.onload = function(){
 var vm = new Vue({
@@ -206,9 +244,14 @@ var vm = new Vue({
         isShowWeb02:false,
         isShowTv01:false,
         isShowTv02:false,
+        isShoeEdit:false,
+        isShoeDelete:false,
         goSearchContent01:'',
         goSearchContent02:'',
 		dataJson:{},
+        //添加网址变量
+        setName:'',
+        setUrl:''
 	},
     mounted () {
         //初始化,获取解析数据
@@ -249,9 +292,11 @@ var vm = new Vue({
         goRefresh:function(){
     	    location.reload()
         },
+        //跳转链接
         getOnclick:function(url){
         	window.open(url)
         },
+        //跳转快捷链接
         goPlan:function (index) {
 			switch (index) {
 				case 1 :
@@ -263,6 +308,36 @@ var vm = new Vue({
                 case 4 :
                     return window.open("http://www.4399.com/");
             }
+        },
+        //显示编辑
+        showEdit:function () {
+    	    if(this.isShoeEdit == false){
+                this.isShoeEdit = true
+            }else {
+                this.isShoeEdit = false
+            }
+        },
+        //显示删除
+        showDelete:function () {
+            if(this.isShoeDelete == false){
+                this.isShoeDelete = true
+            }else {
+                this.isShoeDelete = false
+            }
+        },
+        onDelete:function(title,item,index){
+    	    console.log("title",title)
+            console.log("item",item)
+            title.name='1111111'
+            this.$Message.info('You have deleted it!');
+        },
+        addNewWeb:function(setName,setUrl,dataJson) {
+            var blob = new Blob([JSON.stringify(dataJson)], { type: "" });
+            saveAs(blob,"data.json", "json");
+            this.$Message.info('ok');
+        },
+        cancel:function () {
+            this.$Message.info('You have cancelled it!');
         }
     }
 });}
